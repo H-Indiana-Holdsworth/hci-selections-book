@@ -57,7 +57,9 @@ export default function Auth() {
   }
   return (
     <div>
-      <button onClick={handleLogin}>Login with Procore</button>
+      <button style={{ height: '500px', width: '300px' }} onClick={handleLogin}>
+        Login with Procore
+      </button>
     </div>
   );
 }

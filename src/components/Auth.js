@@ -32,13 +32,14 @@ export default function Auth() {
           }
           procoreIframeHelpers.initialize().authentication.notifySuccess({});
         } catch (e) {
-          error(e);
+          alert(e);
           // console.error(e);
         }
       };
       fetchToken();
     }
   }, [query]);
+
   async function handleLogin() {
     const iframeHelperContext = procoreIframeHelpers.initialize();
     const authUrl = `

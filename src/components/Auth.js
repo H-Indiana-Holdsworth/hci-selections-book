@@ -23,18 +23,13 @@ export default function Auth() {
     // console.log(query.get('code'));
     if (query.get('code')) {
       const fetchToken = async () => {
-        try {
-          const resp = await fetch(`.netlify/functions/exchange-token?code=${query.get('code')}`);
-          const data = await resp.json();
-          // console.log(data);
-          if (data.access_token) {
-            localStorage.setItem('token', data.access_token);
-          }
-          procoreIframeHelpers.initialize().authentication.notifySuccess({});
-        } catch (e) {
-          setError(e);
-          // console.error(e);
+        const resp = await fetch(`.netlify/functions/exchange-token?code=${query.get('code')}`);
+        const data = await resp.json();
+        // console.log(data);
+        if (data.access_token) {
+          localStorage.setItem('token', data.access_token);
         }
+        procoreIframeHelpers.initialize().authentication.notifySuccess({});
       };
       fetchToken();
     }

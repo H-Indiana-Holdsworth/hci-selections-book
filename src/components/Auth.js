@@ -1,7 +1,7 @@
 import * as procoreIframeHelpers from '@procore/procore-iframe-helpers';
 
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function useQuery() {
   const { search } = useLocation();
@@ -17,21 +17,23 @@ export default function Auth() {
     if (localStorage.getItem('token')) {
       history.push('/me');
     }
-  }, []);
+  }, [history]);
+
   useEffect(() => {
-    console.log(query.get('code'));
+    // console.log(query.get('code'));
     if (query.get('code')) {
       const fetchToken = async () => {
         try {
           const resp = await fetch(`.netlify/functions/exchange-token?code=${query.get('code')}`);
           const data = await resp.json();
-          console.log(data);
+          // console.log(data);
           if (data.access_token) {
             localStorage.setItem('token', data.access_token);
           }
           procoreIframeHelpers.initialize().authentication.notifySuccess({});
         } catch (e) {
           console.error(e);
+          // console.error(e);
         }
       };
       fetchToken();
@@ -50,7 +52,7 @@ export default function Auth() {
         // authentication was a success.
         window.location = '/me';
       },
-      onFailure(error) {
+      onFailure() {
         // If the child authentication window exits without sending a success message,
         // this function will execute
         alert('authentication failed!');

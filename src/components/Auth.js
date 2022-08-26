@@ -32,7 +32,7 @@ export default function Auth() {
           }
           procoreIframeHelpers.initialize().authentication.notifySuccess({});
         } catch (e) {
-          console.error(e);
+          error(e);
           // console.error(e);
         }
       };

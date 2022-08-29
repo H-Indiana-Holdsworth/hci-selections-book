@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default function Me() {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
+
   useEffect(() => {
     const loadData = async () => {
       const resp = await fetch(`.netlify/functions/me?token=${localStorage.getItem('token')}`);
@@ -12,6 +13,7 @@ export default function Me() {
     };
     loadData();
   }, []);
+
   return (
     <div>
       <h1>Me</h1>
